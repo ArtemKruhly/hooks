@@ -1,5 +1,6 @@
 import React from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export default class Example extends React.Component {
 		constructor(props) {
@@ -12,7 +13,9 @@ export default class Example extends React.Component {
 		}
 
 		logout() {
-				localStorage.clear();
+				localStorage.setItem('isAuth', 'false');
+				localStorage.setItem('username', '');
+				localStorage.setItem('pass', '');
 		}
 
 		toggleNavbar() {
@@ -25,12 +28,14 @@ export default class Example extends React.Component {
 				return (
 						<div>
 								<Navbar color="faded" light>
-										<NavbarBrand href="/" className="mr-auto">APP</NavbarBrand>
+										<NavbarBrand className="mr-auto">
+												User: {localStorage.getItem('username') || ''}
+										</NavbarBrand>
 										<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
 										<Collapse isOpen={!this.state.collapsed} navbar>
 												<Nav navbar>
 														<NavItem>
-																<NavLink to="/">Main</NavLink>
+																<Link to="/">Main</Link>
 														</NavItem>
 														<NavItem>
 																{!!localStorage.getItem('isAuth') &&

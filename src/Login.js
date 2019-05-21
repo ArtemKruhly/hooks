@@ -11,6 +11,16 @@ export default class Example extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.addedUser = this.addedUser.bind(this);
+  }
+
+  addedUser() {
+    this.props.addUser(this.state.username, this.state.password);
+    alert(`User ${this.state.username} has beed added`);
+    this.setState({
+      username: '',
+      password: '',
+    });
   }
 
   handleChange(e) {
@@ -22,11 +32,12 @@ export default class Example extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let user = localStorage.getItem('username');
-    let pass = localStorage.getItem('pass');
-    if ((this.state.username === user) && (this.state.password === pass)) {
+    let curUser = this.props.users.map(item => item.username).find(us => us === this.state.username);
+    let curPass = this.props.users.map(item => item.password).find(ps => ps === this.state.password);
+    if (curUser && curPass) {
       localStorage.setItem('isAuth', 'true');
-      this.props.history.push('/');
+      localStorage.setItem('username', curUser);
+      document.location.reload(true);
     } else {
       alert('bad credentials');
       this.setState({
@@ -39,8 +50,8 @@ export default class Example extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-					{!localStorage.getItem('isAuth') || localStorage.getItem('isAuth') === 'false' ?
+      <Form onSubmit={this.handleSubmit} style={{ width: '50%' }}>
+					{(localStorage.getItem('isAuth') === 'false') ?
 							<div>
 									<FormGroup>
 									<Label for="exampleEmail">Username</Label>
@@ -62,7 +73,10 @@ export default class Example extends React.Component {
 													onChange={this.handleChange}
 											/>
 									</FormGroup>
-							<Button type='submit'>Submit</Button>
+                <div className="submit_btn">
+                  <Button type='submit'>Login</Button>
+                  <Button onClick={this.addedUser}>Add new user</Button>
+                </div>
 							</div>
 					:
 							<Content />

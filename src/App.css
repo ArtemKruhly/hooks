@@ -4,8 +4,8 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 94vh;
-
+  min-height: 92vh;
+	margin: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,4 +28,9 @@
 
 .nav_active {
   color: red;
+}
+
+.submit_btn {
+  display: flex;
+  justify-content: space-between;
 }

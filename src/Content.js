@@ -5,7 +5,7 @@ export default class Content extends React.Component {
 
 		render() {
 				return (
-						<div style={{ marginBottom: '100px' }}>
+						<div className="marg" style={document.location.pathname === '/test' ? { display: 'none' } : {}}>
 								{!!localStorage.getItem('isAuth') || localStorage.getItem('isAuth') === 'true' ?
 								<ul>
 										<li>
@@ -19,6 +19,12 @@ export default class Content extends React.Component {
 										</li>
 										<li>
 												<NavLink to={'/hook'} activeClassName='nav_active'>Hook</NavLink>
+										</li>
+										<li>
+												<a href={'/test'}>Space</a>
+										</li>
+										<li>
+												<NavLink to={'/admin'} activeClassName='nav_active'>Admin</NavLink>
 										</li>
 								</ul>
 										:

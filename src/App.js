@@ -8,6 +8,8 @@ import FunHook from './FunHook';
 import Header from './Header';
 import db from './db';
 import Login from './Login';
+import AdminPage from './AdminPage';
+import Test from './Test';
 
 class App extends React.Component {
   constructor(props) {
@@ -47,27 +49,33 @@ class App extends React.Component {
   render() {
     return (
         <BrowserRouter>
-          <div className="App">
-            <div className="lines">
-              <div className="line" />
-              <div className="line" />
-              <div className="line" />
-            </div>
-            <Header users={this.state.users} />
-            <header className="App-header">
-              <Login
-                addUser={this.addUser}
-                users={this.state.users}
-              />
-              <Route exact path = '/location' component={Geo} />
-              <Route exact path = '/video' component={Video} />
-              <Route exact path = '/audio' component={Audio} />
-              <Route exact path = '/hook' component={FunHook} />
-            </header>
-          </div>
+						<div className="App">
+								<div className="lines">
+										<div className="line" />
+										<div className="line" />
+										<div className="line" />
+								</div>
+								<Header users={this.state.users} />
+								<header className="App-header">
+										<Login
+												addUser={this.addUser}
+												users={this.state.users}
+										/>
+										<Route exact path = '/location' component={Geo} />
+										<Route exact path = '/video' component={Video} />
+										<Route exact path = '/audio' component={Audio} />
+										<Route exact path = '/hook' component={FunHook} />
+										<Route exact path = '/test' component={Test} />
+										<Route exact path = '/admin' component={() => {
+												return <AdminPage users={this.state.users} />;
+										}
+										}
+										/>
+								</header>
+						</div>
         </BrowserRouter>
     );
   }
 }
 
-export default App;
+export default (App);

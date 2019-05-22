@@ -53,6 +53,19 @@ li {
 	list-style-type: none;
 }
 
+.flex {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+}
+
+.login_form {
+		width: 30%;
+}
+
+.marg {
+		margin-bottom: 100px;
+}
 
 /* background */
 

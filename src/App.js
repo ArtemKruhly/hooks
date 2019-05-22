@@ -12,6 +12,7 @@ import AdminPage from './AdminPage';
 import Test from './Test';
 import { Router } from 'react-router';
 import { createBrowserHistory } from 'history';
+import UsersParser from './UsersParser';
 
 const history = createBrowserHistory();
 
@@ -71,6 +72,7 @@ class App extends React.Component {
 												<Route exact path = '/audio' component={Audio} />
 												<Route exact path = '/hook' component={FunHook} />
 												<Route exact path = '/test' component={Test} />
+												<Route exact path = '/parser' component={UsersParser} />
 												<Route exact path = '/admin' component={() => {
 														return <AdminPage users={this.state.users} />;
             }

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
-export default class Example extends React.Component {
+class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,3 +50,5 @@ export default class Example extends React.Component {
     );
   }
 }
+
+export default withRouter(Header);

@@ -34,5 +34,4 @@ export default class Test extends React.Component {
 					</div>
 				);
 		}
-
 }

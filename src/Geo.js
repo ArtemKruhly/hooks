@@ -9,10 +9,10 @@ class Geo extends React.Component {
   }
 
   redirecting() {
-    if (!this.props.isGeolocationAvailable) {
+    if (localStorage.getItem('isAuth') === 'false') {
       return <Redirect to={'/'} />;
     }
-  };
+  }
 
   render() {
     return (

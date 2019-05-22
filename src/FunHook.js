@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 
 export default function FunHook() {
 		const [count, setCount] = useState(0);
@@ -9,7 +10,12 @@ export default function FunHook() {
 		useEffect(() => {
 				localStorage.setItem('formData', count);
 				document.title = ` ${count} times`;
+
 		}, [count]);
+
+		if (localStorage.getItem('isAuth') === 'false') {
+				return <Redirect to={'/'} />;
+		}
 
 		return (
 				<div>

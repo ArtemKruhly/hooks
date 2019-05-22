@@ -26,20 +26,21 @@ export default class Example extends React.Component {
 
 		render() {
 				return (
-						<div>
+						<div className="nav_bar">
 								<Navbar color="faded" light>
 										<NavbarBrand className="mr-auto">
 												User: {localStorage.getItem('username') || ''}
 										</NavbarBrand>
 										<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
 										<Collapse isOpen={!this.state.collapsed} navbar>
-												<Nav navbar>
+												<Nav navbar className="menu_nav">
 														<NavItem>
-																<Link to="/">Main</Link>
+																<Link to="/" className="menu_nav">Main</Link>
 														</NavItem>
 														<NavItem>
-																{!!localStorage.getItem('isAuth') &&
-																	<NavLink href="/" onClick={this.logout}>Log out</NavLink>
+																{!!localStorage.getItem('isAuth')
+																&& localStorage.getItem('isAuth') === 'true' &&
+																	<NavLink href="/" className="menu_nav" onClick={this.logout}>Log out</NavLink>
 																}
 														</NavItem>
 												</Nav>

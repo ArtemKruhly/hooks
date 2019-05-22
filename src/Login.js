@@ -16,7 +16,7 @@ export default class Example extends React.Component {
 
   addedUser() {
     this.props.addUser(this.state.username, this.state.password);
-    alert(`User ${this.state.username} has beed added`);
+    alert(`User ${this.state.username} has been added`);
     this.setState({
       username: '',
       password: '',

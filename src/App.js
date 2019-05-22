@@ -45,10 +45,14 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.users.map(item => item.username));
     return (
         <BrowserRouter>
           <div className="App">
+            <div className="lines">
+              <div className="line" />
+              <div className="line" />
+              <div className="line" />
+            </div>
             <Header users={this.state.users} />
             <header className="App-header">
               <Login

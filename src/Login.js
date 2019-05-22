@@ -75,7 +75,12 @@ export default class Example extends React.Component {
 									</FormGroup>
                 <div className="submit_btn">
                   <Button type='submit'>Login</Button>
-                  <Button onClick={this.addedUser}>Add new user</Button>
+                  <Button
+											onClick={this.addedUser}
+											disabled={!this.state.username || !this.state.password}
+									>
+											Add new user
+                  </Button>
                 </div>
 							</div>
 					:

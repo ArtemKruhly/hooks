@@ -50,7 +50,7 @@ export default class Example extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit} style={{ width: '50%' }}>
+      <Form onSubmit={this.handleSubmit} style={{ width: '30%' }}>
 					{(localStorage.getItem('isAuth') === 'false') ?
 							<div>
 									<FormGroup>

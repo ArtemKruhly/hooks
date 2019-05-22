@@ -21,6 +21,9 @@ export default class Content extends React.Component {
 												<NavLink to={'/hook'} activeClassName='nav_active'>Hook</NavLink>
 										</li>
 										<li>
+												<NavLink to={'/parser'} activeClassName='nav_active'>Fetch</NavLink>
+										</li>
+										<li>
 												<a href={'/test'}>Space</a>
 										</li>
 										<li>

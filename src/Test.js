@@ -18,7 +18,7 @@ export default class Test extends React.Component {
 				return (
 					<div className="main_test">
 							{this.redirect()}
-							{/*<audio src={'/12.mp3'} autoPlay loop />*/}
+							<audio src={'/12.mp3'} autoPlay loop />
 							<div id='stars' />
 							<div id='stars2' />
 							<div id='stars3' />

@@ -82,7 +82,7 @@ class App extends React.Component {
 						<Router history={history}>
 								<div className="App">
 										<strong style={{ color: 'white' }}>
-												This is the timer value: {moment(this.state.timestamp).format('MMMM Do YYYY, h:mm:ss a')}
+												This is the timer value: {moment(this.state.timestamp).format('MMMM Do YYYY, h:mm:ss a') || moment()}
 										</strong>
 										<div className="lines">
 												<div className="line" />
@@ -104,7 +104,7 @@ class App extends React.Component {
 														/>;
 												}} />
 												<Route exact path = '/hook' component={FunHook} />
-												<Route exact path = '/test' component={Test} />
+												<Route exact path = '/space' component={Test} />
 												<Route exact path = '/parser' component={UsersParser} />
 												<Route exact path = '/admin' component={() => {
 														return <AdminPage users={this.state.users} />;

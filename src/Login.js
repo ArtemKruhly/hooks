@@ -84,7 +84,7 @@ export default class Example extends React.Component {
                 </div>
 							</div>
 					:
-							<Content />
+							<Content history={this.props.history} />
 					}
 				</Form>
     );

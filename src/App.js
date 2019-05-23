@@ -89,11 +89,15 @@ class App extends React.Component {
 												<div className="line" />
 												<div className="line" />
 										</div>
-										<Header users={this.state.users} />
+										<Header
+												users={this.state.users}
+												history={history}
+										/>
 										<header className="App-header">
 												<Login
 														addUser={this.addUser}
 														users={this.state.users}
+														history={history}
 												/>
 												<Route exact path = '/location' component={Geo} />
 												<Route exact path = '/video' component={Video} />

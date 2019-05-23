@@ -5,7 +5,7 @@ export default class Content extends React.Component {
 
 		render() {
 				return (
-						<div className="marg" style={document.location.pathname === '/test' ? { display: 'none' } : {}}>
+						<div className="marg" style={this.props.history.location.pathname === '/space' ? { display: 'none' } : {}}>
 								{!!localStorage.getItem('isAuth') || localStorage.getItem('isAuth') === 'true' ?
 								<ul>
 										<li>
@@ -24,7 +24,7 @@ export default class Content extends React.Component {
 												<NavLink to={'/parser'} activeClassName='nav_active'>Fetch</NavLink>
 										</li>
 										<li>
-												<a href={'/test'}>Space</a>
+												<NavLink to={'/space'}>Space</NavLink>
 										</li>
 										<li>
 												<NavLink to={'/admin'} activeClassName='nav_active'>Admin</NavLink>

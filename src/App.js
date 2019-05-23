@@ -21,8 +21,10 @@ class App extends React.Component {
     super(props);
     this.state = {
       users: [],
+      files: [],
     };
     this.addUser = this.addUser.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
   }
 
   componentDidMount() {
@@ -31,11 +33,16 @@ class App extends React.Component {
     }
 
     db.table('users')
-				.toArray()
-				.then((users) => {
+			.toArray()
+			.then((users) => {
       this.setState({ users });
-				});
+    });
 
+    db.table('files')
+      .toArray()
+      .then((files) => {
+        this.setState({ files });
+      });
   }
 
   addUser(username, password) {
@@ -51,9 +58,18 @@ class App extends React.Component {
         });
   }
 
+  uploadFile(file) {
+    db.table('files')
+      .add(file)
+      .then((id) => {
+        const newList1 = [...this.state.files, Object.assign({}, file, { id })];
+        this.setState({ files: newList1 });
+      });
+  }
+
   render() {
     return (
-        <BrowserRouter>
+			<BrowserRouter>
 						<Router history={history}>
 								<div className="App">
 										<div className="lines">
@@ -69,7 +85,12 @@ class App extends React.Component {
 												/>
 												<Route exact path = '/location' component={Geo} />
 												<Route exact path = '/video' component={Video} />
-												<Route exact path = '/audio' component={Audio} />
+												<Route exact path = '/audio' component={() => {
+														return <Audio
+																uploadFile={this.uploadFile}
+																files={this.state.files}
+														/>;
+												}} />
 												<Route exact path = '/hook' component={FunHook} />
 												<Route exact path = '/test' component={Test} />
 												<Route exact path = '/parser' component={UsersParser} />

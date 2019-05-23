@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { Redirect } from 'react-router-dom';
+import FileUploader from './FileUploader';
 
 export default class Audio extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class Audio extends React.Component {
   }
 
   render() {
+    // const file = this.props.files.map(item => item[0].name);
     return (
       <div>
         {this.redirect()}
@@ -22,6 +24,9 @@ export default class Audio extends React.Component {
             src={'/audio.mp3'}
             autoPlay={false}
             controls={true}
+        />
+        <FileUploader
+          uploadFile={this.props.uploadFile}
         />
       </div>
     );

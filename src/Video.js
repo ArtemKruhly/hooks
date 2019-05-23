@@ -16,7 +16,7 @@ export default class Video extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ position: 'relative' }}>
         {this.redirect()}
         <ReactPlayer
             url={'https://www.youtube.com/watch?v=ysz5S6PUM-U'}

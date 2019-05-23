@@ -13,6 +13,8 @@ import Test from './Test';
 import { Router } from 'react-router';
 import { createBrowserHistory } from 'history';
 import UsersParser from './UsersParser';
+import subscribeToTimer from './ClientSocket';
+import moment from "moment";
 
 const history = createBrowserHistory();
 
@@ -22,6 +24,7 @@ class App extends React.Component {
     this.state = {
       users: [],
       files: [],
+      timestamp: 'no timestamp yet',
     };
     this.addUser = this.addUser.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
@@ -43,6 +46,10 @@ class App extends React.Component {
       .then((files) => {
         this.setState({ files });
       });
+
+			subscribeToTimer((err, timestamp) => this.setState({
+					timestamp
+			}));
   }
 
   addUser(username, password) {
@@ -67,11 +74,16 @@ class App extends React.Component {
       });
   }
 
+
+
   render() {
     return (
-			<BrowserRouter>
+				<BrowserRouter>
 						<Router history={history}>
 								<div className="App">
+										<strong style={{ color: 'white' }}>
+												This is the timer value: {moment(this.state.timestamp).format('MMMM Do YYYY, h:mm:ss a')}
+										</strong>
 										<div className="lines">
 												<div className="line" />
 												<div className="line" />

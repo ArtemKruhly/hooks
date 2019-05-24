@@ -33,13 +33,13 @@ class App extends React.Component {
       localStorage.setItem('isAuth', 'false');
     }
 
-		localStorage.setItem('refreshTime', '3600');
+    localStorage.setItem('refreshTime', '3600');
 
-    db.table('users')
-		.toArray()
-		.then((users) => {
-      this.setState({ users });
-    });
+		db.table('users')
+			.toArray()
+			.then((users) => {
+      	this.setState({ users });
+    	});
 
     db.table('files')
       .toArray()
@@ -73,48 +73,43 @@ class App extends React.Component {
   render() {
     return (
 			<BrowserRouter>
-						<Router history={history}>
-								<div className="App">
-										<div className="lines">
-												<div className="line" />
-												<div className="line" />
-												<div className="line" />
-										</div>
-										<Header
-												users={this.state.users}
-												history={history}
-										/>
-										<Content history={history} />
-										<header className="App-header">
-												<Route path = '/' component={() => {
-														return <Login
-																addUser={this.addUser}
-																users={this.state.users}
-																history={history}
-														/>;
-												}} />
-												<Route exact path = '/location' component={Geo} />
-												<Route exact path = '/video' component={Video} />
-												<Route exact path = '/audio' component={() => {
-														return <Audio
-																uploadFile={this.uploadFile}
-																files={this.state.files}
-														/>;
-												}} />
-												<Route exact path = '/hook' component={FunHook} />
-												<Route exact path = '/space' component={Test} />
-												<Route exact path = '/parser' component={() => {
-														return <UsersParser history={history} />;
-												}} />
-												<Route exact path = '/admin' component={() => {
-														return <AdminPage users={this.state.users} />;
-            }
-												}
-												/>
-										</header>
-								</div>
-						</Router>
-        </BrowserRouter>
+				<Router history={history}>
+					<div className="App">
+						<div className="lines">
+							<div className="line" />
+							<div className="line" />
+							<div className="line" />
+						</div>
+							<Header
+								users={this.state.users}
+								history={history}
+							/>
+							<Content history={history} />
+							<header className="App-header">
+								<Route path = '/' component={() =>
+									<Login
+										addUser={this.addUser}
+										users={this.state.users}
+										history={history}
+									/>}
+								/>
+								<Route exact path = '/location' component={Geo} />
+								<Route exact path = '/video' component={Video} />
+								<Route exact path = '/audio' component={() =>
+									<Audio
+										uploadFile={this.uploadFile}
+										files={this.state.files}
+									/>
+								}
+								/>
+								<Route exact path = '/hook' component={FunHook} />
+								<Route exact path = '/space' component={Test} />
+								<Route exact path = '/parser' component={() => <UsersParser history={history} />} />
+								<Route exact path = '/admin' component={() => <AdminPage users={this.state.users} />} />
+							</header>
+					</div>
+				</Router>
+			</BrowserRouter>
     );
   }
 }

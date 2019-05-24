@@ -20,14 +20,17 @@ export default class Example extends React.Component {
       setInterval(() => {
         if (!!localStorage.getItem('expireTime')) {
           let exp = Number(localStorage.getItem('expireTime'));
-          this.setState({ time: exp }, () => localStorage.setItem('expireTime', this.state.time));
+          this.setState({ time: exp }, () =>
+            localStorage.setItem('expireTime', this.state.time));
         }
 
-        this.setState({ time: this.state.time + 1 }, () => localStorage.setItem('expireTime', this.state.time));
+        this.setState({ time: this.state.time + 1 }, () =>
+          localStorage.setItem('expireTime', this.state.time));
 
         let ref = Number(localStorage.getItem('refreshTime'));
         if (this.state.time >= ref) {
           localStorage.setItem('expireTime', '');
+          localStorage.setItem('username', '');
           localStorage.setItem('isAuth', 'false');
           document.location.reload(true);
           this.props.history.push('/');
@@ -54,8 +57,10 @@ export default class Example extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let curUser = this.props.users.map(item => item.username).find(us => us === this.state.username);
-    let curPass = this.props.users.map(item => item.password).find(ps => ps === this.state.password);
+    let curUser = this.props.users.map(item => item.username).find(us =>
+      us === this.state.username);
+    let curPass = this.props.users.map(item => item.password).find(ps =>
+      ps === this.state.password);
     if (curUser && curPass) {
       localStorage.setItem('isAuth', 'true');
       localStorage.setItem('username', curUser);
@@ -112,15 +117,20 @@ export default class Example extends React.Component {
                       <Link to={'/reg'}>Registration</Link>
                   }
                   {this.props.history.location.pathname !== '/reg' ?
-                      <Button type='submit'>Login</Button>
+                      <Button
+                        type='submit'
+                        disabled={!this.state.username || !this.state.password}
+                      >
+                        Login
+                      </Button>
                       :
                       <Link to={'/'}>Login</Link>
                   }
                 </div>
 							</div>
               :
-							null
-					}
+            null
+        }
 				</Form>
     );
   }

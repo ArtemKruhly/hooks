@@ -35,11 +35,11 @@ class App extends React.Component {
 
     localStorage.setItem('refreshTime', '3600');
 
-		db.table('users')
-			.toArray()
-			.then((users) => {
-      	this.setState({ users });
-    	});
+    db.table('users')
+     .toArray()
+     .then((users) => {
+        this.setState({ users });
+      });
 
     db.table('files')
       .toArray()
@@ -99,8 +99,7 @@ class App extends React.Component {
 									<Audio
 										uploadFile={this.uploadFile}
 										files={this.state.files}
-									/>
-								}
+									/>}
 								/>
 								<Route exact path = '/hook' component={FunHook} />
 								<Route exact path = '/space' component={Test} />

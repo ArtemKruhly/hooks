@@ -16,7 +16,7 @@ class Header extends React.Component {
   logout() {
     localStorage.setItem('isAuth', 'false');
     localStorage.setItem('username', '');
-		localStorage.setItem('expireTime', '');
+    localStorage.setItem('expireTime', '');
   }
 
   toggleNavbar() {
@@ -27,7 +27,10 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="nav_bar" style={this.props.history.location.pathname === '/space' ? { display: 'none' } : {}}>
+      <div
+				className="nav_bar"
+				style={this.props.history.location.pathname === '/space' ? { display: 'none' } : {}}
+			>
 				<Navbar color="faded" light>
 					<NavbarBrand className="mr-auto">
 						User: {localStorage.getItem('username') || ''}

@@ -16,7 +16,7 @@ class Header extends React.Component {
   logout() {
     localStorage.setItem('isAuth', 'false');
     localStorage.setItem('username', '');
-    localStorage.setItem('pass', '');
+		localStorage.setItem('expireTime', '');
   }
 
   toggleNavbar() {
@@ -35,10 +35,10 @@ class Header extends React.Component {
 					<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
 					<Collapse isOpen={!this.state.collapsed} navbar>
 						<Nav navbar className="menu_nav">
-								<NavItem>
-										<Link to="/" className="menu_nav">Main</Link>
-								</NavItem>
-								<NavItem>
+							<NavItem>
+								<Link to={'/'} className="menu_nav">Main</Link>
+							</NavItem>
+							<NavItem>
 								{!!localStorage.getItem('isAuth') && localStorage.getItem('isAuth') === 'true' &&
 									<NavLink href="/" className="menu_nav" onClick={this.logout}>Log out</NavLink>
 								}

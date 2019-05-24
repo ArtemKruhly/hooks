@@ -8,10 +8,32 @@ export default class Example extends React.Component {
     this.state = {
       username: '',
       password: '',
+      time: 0,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.addedUser = this.addedUser.bind(this);
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem('isAuth') === 'true') {
+      setInterval(() => {
+        if (!!localStorage.getItem('expireTime')) {
+          let exp = Number(localStorage.getItem('expireTime'));
+          this.setState({ time: exp }, () => localStorage.setItem('expireTime', this.state.time));
+        }
+
+        this.setState({ time: this.state.time + 1 }, () => localStorage.setItem('expireTime', this.state.time));
+
+        let ref = Number(localStorage.getItem('refreshTime'));
+        if (this.state.time >= ref) {
+          localStorage.setItem('expireTime', '');
+          localStorage.setItem('isAuth', 'false');
+          document.location.reload(true);
+          this.props.history.push('/');
+        }
+      }, 1000);
+    }
   }
 
   addedUser() {
@@ -37,6 +59,7 @@ export default class Example extends React.Component {
     if (curUser && curPass) {
       localStorage.setItem('isAuth', 'true');
       localStorage.setItem('username', curUser);
+      localStorage.setItem('expireTime', this.state.time);
       document.location.reload(true);
     } else {
       alert('bad credentials');
@@ -50,28 +73,32 @@ export default class Example extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit} className="login_form" style={document.location.pathname === '/test' ? { display: 'none' } : {}}>
+      <Form
+        onSubmit={this.handleSubmit}
+        className="login_form"
+        style={document.location.pathname === '/test' ? { display: 'none' } : {}}
+      >
 					{(localStorage.getItem('isAuth') === 'false') ?
-							<div>
+            <div>
+                <FormGroup>
+                <Label for="exampleEmail">Username</Label>
+                <Input
+                  type="text"
+                  name="username"
+                  value={this.state.username}
+                  id="exampleEmail"
+                  onChange={this.handleChange}
+                />
+							  </FormGroup>
 									<FormGroup>
-									<Label for="exampleEmail">Username</Label>
-									<Input
-											type="text"
-											name="username"
-											value={this.state.username}
-											id="exampleEmail"
-											onChange={this.handleChange}
-									/>
-							</FormGroup>
-									<FormGroup>
-											<Label for="examplePassword">Password</Label>
-											<Input
-													type="password"
-													name="password"
-													value={this.state.password}
-													id="examplePassword"
-													onChange={this.handleChange}
-											/>
+                    <Label for="examplePassword">Password</Label>
+                    <Input
+                      type="password"
+                      name="password"
+                      value={this.state.password}
+                      id="examplePassword"
+                      onChange={this.handleChange}
+                    />
 									</FormGroup>
                 <div className="submit_btn">
                   {this.props.history.location.pathname === '/reg' ?
@@ -91,7 +118,7 @@ export default class Example extends React.Component {
                   }
                 </div>
 							</div>
-					:
+              :
 							null
 					}
 				</Form>

@@ -33,9 +33,11 @@ class App extends React.Component {
       localStorage.setItem('isAuth', 'false');
     }
 
+		localStorage.setItem('refreshTime', '3600');
+
     db.table('users')
-			.toArray()
-			.then((users) => {
+		.toArray()
+		.then((users) => {
       this.setState({ users });
     });
 
@@ -104,13 +106,6 @@ class App extends React.Component {
 												<Route exact path = '/parser' component={() => {
 														return <UsersParser history={history} />;
 												}} />
-												{/*<Route exact path = '/reg' component={() => {*/}
-												{/*		return <Login*/}
-												{/*				addUser={this.addUser}*/}
-												{/*				users={this.state.users}*/}
-												{/*				history={history}*/}
-												{/*				/>;*/}
-												{/*}} />*/}
 												<Route exact path = '/admin' component={() => {
 														return <AdminPage users={this.state.users} />;
             }

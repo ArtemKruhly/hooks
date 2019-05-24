@@ -5,8 +5,8 @@ export default class Content extends React.Component {
 
 		render() {
 				return (
-						<div className="marg" style={this.props.history.location.pathname === '/space' ? { display: 'none' } : {}}>
-								{!!localStorage.getItem('isAuth') || localStorage.getItem('isAuth') === 'true' ?
+						<div style={this.props.history.location.pathname === '/space' ? { display: 'none' } : {}}>
+								{localStorage.getItem('isAuth') === 'true' ?
 								<ul>
 										<li>
 												<NavLink to={'/video'} activeClassName='nav_active'>Video Player</NavLink>

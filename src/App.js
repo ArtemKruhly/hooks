@@ -13,8 +13,7 @@ import Test from './Test';
 import { Router } from 'react-router';
 import { createBrowserHistory } from 'history';
 import UsersParser from './UsersParser';
-import subscribeToTimer from './ClientSocket';
-import moment from "moment";
+import Content from './Content';
 
 const history = createBrowserHistory();
 
@@ -24,7 +23,6 @@ class App extends React.Component {
     this.state = {
       users: [],
       files: [],
-      timestamp: 'no timestamp yet',
     };
     this.addUser = this.addUser.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
@@ -46,10 +44,6 @@ class App extends React.Component {
       .then((files) => {
         this.setState({ files });
       });
-
-			subscribeToTimer((err, timestamp) => this.setState({
-					timestamp
-			}));
   }
 
   addUser(username, password) {
@@ -74,16 +68,11 @@ class App extends React.Component {
       });
   }
 
-
-
   render() {
     return (
-				<BrowserRouter>
+			<BrowserRouter>
 						<Router history={history}>
 								<div className="App">
-										<strong style={{ color: 'white' }}>
-												This is the timer value: {moment(this.state.timestamp).format('MMMM Do YYYY, h:mm:ss a') || moment()}
-										</strong>
 										<div className="lines">
 												<div className="line" />
 												<div className="line" />
@@ -93,12 +82,15 @@ class App extends React.Component {
 												users={this.state.users}
 												history={history}
 										/>
+										<Content history={history} />
 										<header className="App-header">
-												<Login
-														addUser={this.addUser}
-														users={this.state.users}
-														history={history}
-												/>
+												<Route path = '/' component={() => {
+														return <Login
+																addUser={this.addUser}
+																users={this.state.users}
+																history={history}
+														/>;
+												}} />
 												<Route exact path = '/location' component={Geo} />
 												<Route exact path = '/video' component={Video} />
 												<Route exact path = '/audio' component={() => {
@@ -109,7 +101,16 @@ class App extends React.Component {
 												}} />
 												<Route exact path = '/hook' component={FunHook} />
 												<Route exact path = '/space' component={Test} />
-												<Route exact path = '/parser' component={UsersParser} />
+												<Route exact path = '/parser' component={() => {
+														return <UsersParser history={history} />;
+												}} />
+												{/*<Route exact path = '/reg' component={() => {*/}
+												{/*		return <Login*/}
+												{/*				addUser={this.addUser}*/}
+												{/*				users={this.state.users}*/}
+												{/*				history={history}*/}
+												{/*				/>;*/}
+												{/*}} />*/}
 												<Route exact path = '/admin' component={() => {
 														return <AdminPage users={this.state.users} />;
             }

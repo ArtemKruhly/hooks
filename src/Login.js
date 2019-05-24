@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import Content from './Content';
+import { Link } from 'react-router-dom';
 
 export default class Example extends React.Component {
   constructor(props) {
@@ -74,17 +74,25 @@ export default class Example extends React.Component {
 											/>
 									</FormGroup>
                 <div className="submit_btn">
-                  <Button type='submit'>Login</Button>
-                  <Button
-											onClick={this.addedUser}
-											disabled={!this.state.username || !this.state.password}
-									>
-											Add new user
-                  </Button>
+                  {this.props.history.location.pathname === '/reg' ?
+                      <Button
+                          onClick={this.addedUser}
+                          disabled={!this.state.username || !this.state.password}
+                      >
+                        Registr
+                      </Button>
+                      :
+                      <Link to={'/reg'}>Registration</Link>
+                  }
+                  {this.props.history.location.pathname !== '/reg' ?
+                      <Button type='submit'>Login</Button>
+                      :
+                      <Link to={'/'}>Login</Link>
+                  }
                 </div>
 							</div>
 					:
-							<Content history={this.props.history} />
+							null
 					}
 				</Form>
     );
